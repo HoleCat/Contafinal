@@ -1,0 +1,28 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3909585, 2020-06-03T00:25:01-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Mont-Heavy by Fontfabric
+ * URL: https://www.myfonts.com/fonts/font-fabric/mont/heavy/
+ * Copyright: Modern and elegant sans serif font family.
+ * 
+ * 
+ * 
+ * © 2020 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/3ba7d1");
+  
+@font-face {
+  font-family: 'Mont-Heavy';
+  src: url('webFonts/Mont-Heavy/font.woff2') format('woff2'), url('webFonts/Mont-Heavy/font.woff') format('woff');
+}
+
