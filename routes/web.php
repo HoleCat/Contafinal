@@ -108,7 +108,7 @@ Route::get('/', function () {
         }
     }
     $noticias = DB::table('noticias')->get();
-    return view('welcome',['foto3'=>$foto3,'foto2'=>$foto2,'foto1'=>$foto1,'noticias'=>$noticias,'resumen'=>$resumen,'principal'=>$principal,'footer'=>$footer,'activos'=>$activos,'muestras'=>$muestras,'xml'=>$xml,'caja'=>$caja,'validacion'=>$validacion,'reporte'=>$reporte,'balance'=>$balance]);
+    return view('home',['foto3'=>$foto3,'foto2'=>$foto2,'foto1'=>$foto1,'noticias'=>$noticias,'resumen'=>$resumen,'principal'=>$principal,'footer'=>$footer,'activos'=>$activos,'muestras'=>$muestras,'xml'=>$xml,'caja'=>$caja,'validacion'=>$validacion,'reporte'=>$reporte,'balance'=>$balance]);
 });
 Route::get('/Admin', function () {
     $users = DB::table('users')
@@ -181,11 +181,14 @@ Route::match(['get', 'post'], '/Delete/trash_r_rentas', 'TrashController@trash_r
 Route::match(['get', 'post'], '/Delete/trash_r_ventas', 'TrashController@trash_r_ventas');
 /////////////TRASH REGISTROS////////////////////
 Route::match(['get', 'post'], '/Delete/trash_reporte_compras', 'TrashController@trash_reporte_compras');
+Route::match(['get', 'post'], '/Delete/trash_detraccion_compras', 'TrashController@trash_detraccion_compras');
 Route::match(['get', 'post'], '/Delete/trash_reporte_ventas', 'TrashController@trash_reporte_ventas');
 
 Route::match(['get', 'post'], '/Delete/trash_compras', 'TrashController@trash_compras');
 Route::match(['get', 'post'], '/Delete/trash_ventas', 'TrashController@trash_ventas');
 Route::match(['get', 'post'], '/Delete/trash_gastos', 'TrashController@trash_gastos');
+Route::match(['get', 'post'], '/Delete/trash_resultados_ruc', 'TrashController@trash_resultados_ruc');
+Route::match(['get', 'post'], '/Delete/trash_rentas', 'TrashController@trash_rentas');
 
 Route::match(['get', 'post'], '/Delete/trash_caja_chica', 'TrashController@trash_caja_chica');
 Route::match(['get', 'post'], '/Delete/trash_rendir_pago', 'TrashController@trash_rendir_pago');
@@ -358,12 +361,12 @@ Route::match(['get', 'post'],'/Caja/Totales', 'CajaController@obtenertotales' );
 Route::post('/Caja/Cajachica', 'CajaController@cajachica' );
 Route::post('/Caja/Cajachica/Adicion', 'CajaController@cajachicainsert' );
 Route::post('/Caja/Cajachica/Info', 'CajaController@cajachicainfo');
-Route::match(['get', 'post'], '/Caja/Cajachica/Exportar', 'CajaController@cajachicaexportar');
+Route::match(['get', 'post'], '/Caja/cajachica/Exportar', 'CajaController@cajachicaexportar');
 
 Route::post('/Caja/Rendirpago', 'CajaController@rendirpago' );
 Route::post('/Caja/Rendirpago/Adicion', 'CajaController@rendirpagoinsert' );
 Route::post('/Caja/Rendirpago/Info', 'CajaController@rendirpagoinfo');
-Route::match(['get', 'post'], '/Caja/Rendirpago/Exportar', 'CajaController@cajachicaexportar');
+Route::match(['get', 'post'], '/Caja/rendirpago/Exportar', 'CajaController@cajachicaexportar');
 
 Route::get('/Caja/Parametros', function () { return view('modules.caja.parametros'); })->name('View.Parametros');
 
@@ -619,4 +622,3 @@ Route::get('/TipoUso', function () {
             $aprobadores = DB::table('aprobadors')->get();
             return $aprobadores; 
         });
-    

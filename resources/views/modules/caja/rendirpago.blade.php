@@ -3,7 +3,7 @@
     @include('layouts.uso')
     @include('layouts.resumen')
     <div class="col-12 text-center">
-        <h3 class="py-3">CALCULO DE CAJA CHICA</h1>
+        <h3 class="py-3">PAGOS A RENDIR</h1>
     </div>
     <div class="col-12">
         <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12">

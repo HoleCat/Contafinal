@@ -242,18 +242,12 @@ class FacturaController extends Controller
                 $spreadsheet->setActiveSheetIndex(0)->setCellValue($cellN, $reg->dato14);
                 $spreadsheet->setActiveSheetIndex(0)->setCellValue($cellO, $reg->dato15);
                 $spreadsheet->setActiveSheetIndex(0)->setCellValue($cellP, $reg->dato16);
-                $spreadsheet->setActiveSheetIndex(0)->setCellValue($cellQ, $reg->dato17);
 
             $i++;
         }
         
         if($request->mail)
         {
-            //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            //header('Content-Disposition: attachment;filename="REPORTE.xlsx"');
-            //header('Cache-Control: max-age=0');
-            // If you're serving to IE 9, then the following may be needed
-            //header('Cache-Control: max-age=1');
             $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
             ob_start();
             $writer->save('php://output');
@@ -337,35 +331,16 @@ class FacturaController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Clases\Xml\Factura  $factura
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Factura $factura)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Clases\Xml\Factura  $factura
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Factura $factura)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Clases\Xml\Factura  $factura
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Factura $factura)
     {
         //

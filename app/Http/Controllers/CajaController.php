@@ -173,7 +173,6 @@ class CajaController extends Controller
             
         }
     }
-
     public function liquidacion(Request $request) {
         try
         {
@@ -211,7 +210,6 @@ class CajaController extends Controller
         }
         
     }
-
     public function cajachica(Request $request) {
         $tiposdocumento = DB::table('comprobantes')->get();
         $codigocontable = DB::table('codigocontables')->get();
@@ -440,7 +438,7 @@ class CajaController extends Controller
 
 
             $sistema = Sistemacontable::firstWhere('id','=',$request->sistema);
-
+            
             foreach ($data as $reg) {
                 $comprobante = Comprobante::firstWhere('id','=',$reg->tipodocumento);
                 $moneda = Moneda::firstWhere('id','=',$reg->moneda);
@@ -664,13 +662,11 @@ class CajaController extends Controller
 
             }
             
-            
-
             return $pdf->download('medium.pdf');
         }
         catch(\Throwable $th)
         {
-            
+            return $th->getMessage();
         }
     }
 }

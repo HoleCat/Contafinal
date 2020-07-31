@@ -47,6 +47,18 @@ class Validacion extends Model
                     else if($obligatorio == "si" && $row[$orden]!="")
                     {
                         switch ($tipo) {
+                                case "ENTERO":
+                                    $regex = new RegEx("/^[0-9]+$/");
+                                    if (!preg_match($regex, $row[$orden])) {
+                                        $mensaje = "DEBE CONTENER SOLO NUMEROS";
+                                    } elseif ($estatico !== "") {
+                                        $regex = new RegEx("/^[0-9]{{$estatico}}+$/");
+                                        $mensaje = "ESTE VALOR DEBE TENER {$estatico} CARACTERES";
+                                    } elseif ($minimo !== "" || $maximo !== "") {
+                                        $regex = new RegEx("/^[0-9]{{$minimo},{$maximo}}+$/");
+                                        $mensaje = "ESTE VALOR DEBE TENER ENTRE {$minimo} Y {$maximo} CARACTERES";
+                                    }
+                                break;
                                 case "NUMERICO":
                                     $regex = new RegEx("/^[0-9]+$/");
                                     $copia = $row[$orden];
@@ -54,9 +66,10 @@ class Validacion extends Model
                                     if (strpos($copia, '.') !== false) {
                                         $copia_ = explode(".",$copia);
                                         $copia = str_replace([",","."],"",$copia);
-                                        $row[$orden] = $copia;
+                                        
                                         if(strlen($copia_[1])==2)
                                         {
+                                            $row[$orden] = $copia;
                                             if (!preg_match($regex, $copia)) {
                                                 $mensaje = "DEBE CONTENER SOLO NUMEROS";
                                             } elseif ($estatico !== "") {
@@ -128,6 +141,18 @@ class Validacion extends Model
                     {
                         switch ($tipo)
                         {
+                            case "ENTERO":
+                                $regex = new RegEx("/^[0-9]+$/");
+                                if (!preg_match($regex, $row[$orden])) {
+                                    $mensaje = "DEBE CONTENER SOLO NUMEROS";
+                                } elseif ($estatico !== "") {
+                                    $regex = new RegEx("/^[0-9]{{$estatico}}+$/");
+                                    $mensaje = "ESTE VALOR DEBE TENER {$estatico} CARACTERES";
+                                } elseif ($minimo !== "" || $maximo !== "") {
+                                    $regex = new RegEx("/^[0-9]{{$minimo},{$maximo}}+$/");
+                                    $mensaje = "ESTE VALOR DEBE TENER ENTRE {$minimo} Y {$maximo} CARACTERES";
+                                }
+                            break;
                             case "NUMERICO":
                                 $regex = new RegEx("/^[0-9]+$/");
                                 $copia = $row[$orden];
@@ -135,9 +160,10 @@ class Validacion extends Model
                                 if (strpos($copia, '.') !== false) {
                                     $copia_ = explode(".",$copia);
                                     $copia = str_replace([",","."],"",$copia);
-                                    $row[$orden] = $copia;
+                                    
                                     if(strlen($copia_[1])==2)
                                     {
+                                        $row[$orden] = $copia;
                                         if (!preg_match($regex, $copia)) {
                                             $mensaje = "DEBE CONTENER SOLO NUMEROS";
                                         } elseif ($estatico !== "") {

@@ -139,7 +139,7 @@
             @extends('modules.caja.modalexportar')
     
             @section('content')
-            <form action="/Caja/Cajachica/Exportar">
+            <form action="/Caja/cajachica/Exportar">
                 <div class="col-12 mx-auto">
                     <div class="form-group">
                         <label>CODIGO DEL DOCUMENTO</label>

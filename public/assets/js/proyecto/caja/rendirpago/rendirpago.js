@@ -56,9 +56,24 @@ var botonesrendirpago = [
         ruta: '/Delete/trash_rendir_pago',
         id_columnname: 'id',
         tag: true,
-        confirm: delete_row,
+        confirm: delete_rendir_pago,
 	}
 ]
+
+function delete_rendir_pago(data)
+{
+	let formdata = new FormData();
+	function eliminartablachill()
+	{
+		tabla_var
+		.row( data.tag.closest('tr') )
+		.remove()
+		.draw();
+	}
+	eliminartablachill();
+    optenertotales();
+    console.log(data);
+}
 
 var parametrosrendirpago = [
     {
@@ -129,4 +144,4 @@ function optenertotales() {
 $(function(){
     creartablavalidada(ejecutarvalidacionrendirpago,'table','tablarendirpago','#formrendirpago','#divtablarendirpago','/Caja/Rendirpago/Adicion',columnascajachicha,cabeceracajachicha,true,optenertotales,botonesrendirpago,identificadorrendirpago);
     tabla_caja(parametrosrendirpago,'table','tablarendirpago','#divtablarendirpago','/Caja/Rendirpago/Info',columnascajachicha,cabeceracajachicha,true,optenertotales,botonesrendirpago,identificadorrendirpago);
-})
+})  

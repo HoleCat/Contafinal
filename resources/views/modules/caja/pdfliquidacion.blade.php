@@ -370,17 +370,19 @@
         <div class="col-12 py-5"></div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 px-0">
+                <div style="display:flex;width:100% ">
                     <table class="table text-left no-border letras-table-xl">
                         <thead>
                             <tr>
-                                <th><img src="{{$empresa->foto}}" style="width: 100px"></th><th></th>
-                            </tr>
-                            <tr>
-                                <th>EMPRESA : {{$empresa->nombre}}</th><th></th>
-                            </tr>
-                            <tr>
-                                <th>NUMERACION : {{$numeracion}}</th><th></th>
+                                <th><img src="{{$empresa->foto}}" style="width: 100px"></th>
+                                <th>
+                                    <tr>
+                                        <th>EMPRESA : {{$empresa->nombre}}<th>
+                                    </tr>
+                                    <tr>
+                                        <th>NUMERACION : {{$numeracion}}</th>
+                                    </tr>
+                                </th>
                             </tr>
                         </thead>
                     </table>

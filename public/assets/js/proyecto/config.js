@@ -682,7 +682,7 @@ function cambiarregistro(ruta,id,funcion) {
 	});
 }
 
-function cambiarregistrotag(tabla,tag,ruta,id,funcion) {
+function cambiarregistrotag(tag,ruta,id,funcion) {
     let formdata = new FormData();
     formdata.append('id',id);
     event.preventDefault();

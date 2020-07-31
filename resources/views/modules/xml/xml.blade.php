@@ -9,7 +9,7 @@
         <h5>1. Importar archivo</h5>
         <form id="formcargaxml" enctype="multipart/form-data">
         <input type="hidden" name="uso_id" value="{{$uso->id}}" id="uso_id">
-            <div class="col-12 d-flex px-0">
+            <div class="col-12 d-flex px-0 flex-wrap">
                 <div class="col-xl-6 col-md-7 col-sm-8 col-xs-10 pl-0">
                     <div class="form-group">
                         <label>NOMBRE PARA EL ARCHIVO</label>
@@ -21,6 +21,9 @@
                     </div>
                 </div>
                 <div class="col-xs-2 text-center" id="cargaxmlfile">
+                    
+                </div>
+                <div class="pl-0 py-3 col-xl-12 col-md-12 col-sm-12 col-xs-12" id="xmllist">
                     
                 </div>
             </div>

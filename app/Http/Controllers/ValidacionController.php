@@ -178,7 +178,11 @@ class ValidacionController extends Controller
         $array_data = $json_data;
         $spreadsheet = IOFactory::load($ruta);
     
-        $cont_1 = 0;
+        $cont_1 = 5;
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', "EMPRESA :");
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A2', "RUC :");
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A3', "PERIODO :");
 
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', $request->empresa);
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('B2', $request->ruc);

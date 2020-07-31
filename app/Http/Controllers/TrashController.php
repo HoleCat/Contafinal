@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Clases\Caja\Cajachica;
+use App\Clases\Caja\LiquidacionDetalle;
+use App\Clases\Caja\Rendirpago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -152,7 +155,18 @@ class TrashController extends Controller
     public function trash_caja_chica(Request $request){
         $msg = "";
         
+        $reg = Cajachica::find($request->id);
+
         $flag = DB::table('cajachicas')->where('id','=',$request->id)->delete();
+
+        $total = DB::table('cajachicas')->where('liquidacion_id','=',$reg->liquidacion_id)->sum('monto');
+        $liqui = LiquidacionDetalle::find($reg->liquidacion_id);
+        
+        $monto = $liqui->monto;
+        $liqui->liquidacion = $total;
+        $liqui->neto = $monto - $total;
+        $liqui->save();
+        
         if($flag == 0)
         {
             $msg = "error posiblemente se alla eliminado ya el registro, de no ser asi recargar e intentar nuevamente, si el error persiste comunicarse con el proveedor.";
@@ -169,7 +183,19 @@ class TrashController extends Controller
     public function trash_rendir_pago(Request $request){
         $msg = "";
         
+        $reg = Rendirpago::find($request->id);
+
         $flag = DB::table('rendirpagos')->where('id','=',$request->id)->delete();
+
+        $total = DB::table('rendirpagos')->where('liquidacion_id','=',$reg->liquidacion_id)->sum('monto');
+        $liqui = LiquidacionDetalle::find($reg->liquidacion_id);
+        
+        $monto = $liqui->monto;
+        $liqui->liquidacion = $total;
+        $liqui->neto = $monto - $total;
+        $liqui->save();
+
+        return print_r($liqui);
         if($flag == 0)
         {
             $msg = "error posiblemente se alla eliminado ya el registro, de no ser asi recargar e intentar nuevamente, si el error persiste comunicarse con el proveedor.";

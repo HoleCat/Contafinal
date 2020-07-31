@@ -28,6 +28,7 @@
                         <label id="validadorlabel" class="custom-file-label" for="validadorfile"></label>
                     </div>
                 </div>
+
                 <div class="col-xs-2 text-center" id="cargavalidadorfile">
                     
                 </div>
@@ -36,6 +37,9 @@
                 <div class="form-group">
                     <input type="submit" value="IMPORTAR" class="btn btn-success">
                 </div>
+                <div class="alert alert-warning" role="alert">
+                    Recuerda importar antes de iniciar tu exportacion !
+                </div>
             </div>
         </form>
     </div>
@@ -43,6 +47,17 @@
     <div class="jumbotron col-12 text-left py-3">
         <h5>3. Exportar resultado</h5>
         <form action="/Validador/Exportar" method="GET">
+            <div class="px-0 col-xl-6 col-md-6 col-sm-8 col-xs-12">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="empresa" placeholder="EMPRESA">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="ruc" placeholder="RUC">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="periodo" placeholder="PERIODO">
+                </div>
+            </div>
             <button type="submit" id="btn-exportar-mayorvalidador" class="btn btn-warning">Exportar en excel</button>
         </form>
     </div>

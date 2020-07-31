@@ -255,6 +255,22 @@ var createTable = ((jData) =>{
 });
 
 function eventosxml() {
+    $('#xmlfile').change(function(e){
+        
+        let files = this.files;
+        var filel = document.querySelector('#xmllist');
+        filel.innerHTML = "";
+        for (let index = 0; index < files.length; index++) {
+            const element = files[index];
+            
+            let dv = document.createElement('div');
+            dv.setAttribute('class','alert alert-success');
+            dv.setAttribute('role','alert');
+            dv.innerHTML = files[index].name;
+            filel.append(dv);
+        }
+		console.log(filename);
+	});
     let uwu = document.querySelector("#formguardardataxml");
     uwu.addEventListener('submit', function(e){
         e.preventDefault();

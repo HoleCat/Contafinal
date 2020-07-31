@@ -42,9 +42,21 @@ function eventosventas(){
 				ruta: '/Delete/trash_ventas',
 				id_columnname: 'id',
 				tag: true,
-				confirm: delete_row,
+				confirm: delete_row_ventas,
 			}
-		]
+        ]
+
+        function delete_row_ventas(data) {
+            function eliminartablachill() {
+                tabla_var
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
+
 		let form = document.querySelector('#formfiltroventas');
 		let formdata = new FormData(form);
 		let cabecera = 

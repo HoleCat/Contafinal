@@ -32,16 +32,28 @@ function eventoscompras(){
 	});
 	$('#formfiltrocompras').submit(function(event){
 		event.preventDefault();
-		let botonescompras = [
-			{
-				btn_text: '<i class="fas fa-trash-alt"></i>',
-				funcion: cambiarregistrotag,
-				ruta: '/Delete/trash_compras',
-				id_columnname: 'id',
-				tag: true,
-				confirm: delete_row,
-			}
-		];
+        let botonescompras = [
+            {
+                btn_text: '<i class="fas fa-trash-alt"></i>',
+                funcion: cambiarregistrotag,
+                ruta: '/Delete/trash_compras',
+                id_columnname: 'id',
+                tag: true,
+                confirm: delete_row_compras,
+            }
+        ];
+
+        function delete_row_compras(data) {
+            function eliminartablachill() {
+                tabla_var
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
+
 		let form = document.querySelector('#formfiltrocompras');
 		let formdata = new FormData(form);
 		let columnas = ['NroDoc','cliente','Periodo','Correlativo','FecEmision','FecVenci','TipoComp','NumSerie',

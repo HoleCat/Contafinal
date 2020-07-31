@@ -1,5 +1,11 @@
 eventosreporte();
 
+var tabla_var_rcompras = "";
+var tabla_var_rventas = "";
+var tabla_var_rrentas = "";
+var tabla_var_rresultadoruc = "";
+var tabla_var_rdetraccion = "";
+
 function confirmar(data){
 	console.log(data);
 }
@@ -13,9 +19,20 @@ function tablareportecomprasvalidacion(id)
 			ruta: '/Delete/trash_reporte_compras',
 			id_columnname: 'IdCool',
 			tag: true,
-			confirm: delete_row,
-		}
-	];
+            confirm: delete_row_rcompras,
+        }
+    ];
+
+    function delete_row_rcompras(data) {
+        function eliminartablachill() {
+            tabla_var_rcompras
+                .row(data.tag.closest('tr'))
+                .remove()
+                .draw();
+        }
+        eliminartablachill();
+        console.log(data);
+    }
 	let botonesdetraccion = [
 		{
 			btn_text: '<i class="fas fa-trash-alt"></i>',
@@ -23,9 +40,20 @@ function tablareportecomprasvalidacion(id)
 			ruta: '/Delete/trash_detraccion_compras',
 			id_columnname: 'id',
 			tag: true,
-			confirm: delete_row,
-		}
-	];
+            confirm: delete_row_rdetraccion,
+        }
+    ];
+
+    function delete_row_rdetraccion(data) {
+        function eliminartablachill() {
+            tabla_var_rdetraccion
+                .row(data.tag.closest('tr'))
+                .remove()
+                .draw();
+        }
+        eliminartablachill();
+        console.log(data);
+    }
 	let botonesruc = [
 		{
 			btn_text: '<i class="fas fa-trash-alt"></i>',
@@ -33,9 +61,20 @@ function tablareportecomprasvalidacion(id)
 			ruta: '/Delete/trash_resultados_ruc',
 			id_columnname: 'id',
 			tag: true,
-			confirm: delete_row,
-		}
-	];
+            confirm: delete_row_rresultadoruc,
+        }
+    ];
+
+    function delete_row_rresultadoruc(data) {
+        function eliminartablachill() {
+            tabla_var_rresultadoruc
+                .row(data.tag.closest('tr'))
+                .remove()
+                .draw();
+        }
+        eliminartablachill();
+        console.log(data);
+    }
 	/*let botonesventas = [
 		{
 			btn_text: '<i class="fas fa-trash-alt"></i>',
@@ -75,9 +114,21 @@ function tablareportecomprasvalidacion(id)
 			ruta: '/Delete/trash_renta',
 			id_columnname: 'id',
 			tag: true,
-			confirm: delete_row,
-		}
-	];
+            confirm: delete_row_rrentas,
+        }
+    ];
+
+    function delete_row_rrentas(data) {
+        function eliminartablachill() {
+            tabla_var_rrentas
+                .row(data.tag.closest('tr'))
+                .remove()
+                .draw();
+        }
+        eliminartablachill();
+        console.log(data);
+    }
+
 	let botonesventas = [
 		{
 			btn_text: '<i class="fas fa-trash-alt"></i>',
@@ -85,9 +136,20 @@ function tablareportecomprasvalidacion(id)
 			ruta: '/Delete/trash_reporte_ventas',
 			id_columnname: 'id',
 			tag: true,
-			confirm: delete_row,
-		}
-	];
+            confirm: delete_row_rventas,
+        }
+    ];
+
+    function delete_row_rventas(data) {
+        function eliminartablachill() {
+            tabla_var_rventas
+                .row(data.tag.closest('tr'))
+                .remove()
+                .draw();
+        }
+        eliminartablachill();
+        console.log(data);
+    }
 
 	var formdata = new FormData();
 	formdata.set('iduso',id);
@@ -223,11 +285,11 @@ function tablareportecomprasvalidacion(id)
 		crearselectfromdata('#selectarchivorenta',data_ini.archivosrentas);
 		crearselectfromdata('#selectarchivoventas',data_ini.archivosventas);
 
-		creartablaseven(data_ventas,formdata,'#cargaventas','table table-bordered','tablaventas','#divventastable',cabecera5,columnas5,true,confirmardataini,botonesventas);
-		creartablasix(data_validacion,checks,formdata,'#cargareportecomprasfile','table table-bordered','tablareporte1','#divreportecomprastable',cabecera2,columnas2,true,confirmardataini,botonesreporte);
-		creartablaseven(data_dtr,formdata,'#cargadetraccioncompras','table table-bordered','tablareporte2','#divdetraccioncomprastable',cabecera1,columnas1,true,confirmardataini,botonesdetraccion);
-		creartablaseven(data_resultadoruc,formdata,'#cargaresultadoruc','table table-bordered','tablareporte3','#divresultadoructable',cabecera3,columnas3,true,confirmardataini,botonesruc);
-		creartablaseven(data_rentas,formdata,'#cargarenta','table table-bordered','tablarenta','#divrentatable',cabecera4,columnas4,true,confirmardataini,botonesrentas);
+		tabla_var_rventas = creartablaseven(data_ventas,formdata,'#cargaventas','table table-bordered','tablaventas','#divventastable',cabecera5,columnas5,true,confirmardataini,botonesventas,tabla_var_rventas);
+        tabla_var_rcompras = creartablasix(data_validacion, checks, formdata, '#cargareportecomprasfile', 'table table-bordered', 'tablareporte1', '#divreportecomprastable', cabecera2, columnas2, true, confirmardataini, botonesreporte, tabla_var_rcompras);
+        tabla_var_rdetraccion = creartablaseven(data_dtr, formdata, '#cargadetraccioncompras', 'table table-bordered', 'tablareporte2', '#divdetraccioncomprastable', cabecera1, columnas1, true, confirmardataini, botonesdetraccion, tabla_var_rdetraccion);
+        tabla_var_rresultadoruc = creartablaseven(data_resultadoruc, formdata, '#cargaresultadoruc', 'table table-bordered', 'tablareporte3', '#divresultadoructable', cabecera3, columnas3, true, confirmardataini, botonesruc, tabla_var_rresultadoruc);
+        tabla_var_rrentas = creartablaseven(data_rentas, formdata, '#cargarenta', 'table table-bordered', 'tablarenta', '#divrentatable', cabecera4, columnas4, true, confirmardataini, botonesrentas, tabla_var_rrentas);
 		generarprorrata('','#divprorrata',data_ini.prorratas);
 		generarcredito('','#divcredito',data_ini.creditos);
 	}
@@ -317,9 +379,20 @@ function eventosreporte()
 				ruta: '/Delete/trash_resultados_ruc',
 				id_columnname: 'id',
 				tag: true,
-				confirm: delete_row,
-			}
+                confirm: delete_row_rresultadoruc,
+            }
         ];
+
+        function delete_row_rresultadoruc(data) {
+            function eliminartablachill() {
+                tabla_var_rresultadoruc
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
 		let form = document.querySelector('#formresultadoruc');
 		let formdata = new FormData(form);
 		function confirmartabla(data) {
@@ -384,9 +457,20 @@ function eventosreporte()
 				ruta: '/Delete/trash_detraccion_compras',
 				id_columnname: 'id',
 				tag: true,
-				confirm: delete_row,
-			}
+                confirm: delete_row_rdetraccion,
+            }
         ];
+
+        function delete_row_rdetraccion(data) {
+            function eliminartablachill() {
+                tabla_var_rdetraccion
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
 		let form = document.querySelector('#formdetraccioncompras');
 		let formdata = new FormData(form);
 		function confirmartabla(data) {
@@ -408,8 +492,8 @@ function eventosreporte()
             'MontoDeposito','TipoBien','TipoOperacion','TipoComprobante','SerieComprobante','NumeroComprobante','NumeroPagoDetraciones',
 			'Porcentaje','Base','ValidacionBase','Denominacion'
 		]
-		
-		creartablafive('dtr',formdata,'#cargadetraccioncompras','table table-bordered','tablareporte2','#divdetraccioncomprastable','/Reporte/Compras/Detraccion',cabecera,columnas,true,confirmartabla,botonesdetraccion);
+
+        creartablafive('dtr', formdata, '#cargadetraccioncompras', 'table table-bordered', 'tablareporte2', '#divdetraccioncomprastable', '/Reporte/Compras/Detraccion', cabecera, columnas, true, confirmartabla, botonesdetraccion, tabla_var_rdetraccion);
 	});
 	///
 	$('#formcargareportecompras').submit(function(event){
@@ -421,9 +505,21 @@ function eventosreporte()
 				ruta: '/Delete/trash_reporte_compras',
 				id_columnname: 'IdCool',
 				tag: true,
-				confirm: delete_row,
-			}
+                confirm: delete_row_rcompras,
+            }
         ];
+
+        function delete_row_rcompras(data) {
+            function eliminartablachill() {
+                tabla_var_rcompras
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
+
         let checks = [
 			{
 				label: 'Liberar :',
@@ -470,7 +566,7 @@ function eventosreporte()
 			'AnoDuaMod','NumSerComOriMod','FecConstDetrac','NumConstDetrac','Retencion','ClasifBi','Contrato',
 			'ErrorT1','ErrorT2','ErrorT3','ErrorT4','MedioPago','Estado'
 		];
-		creartablafour('validacion',checks,formdata,'#cargareportecomprasfile','table table-bordered','tablareporte1','#divreportecomprastable','/Reporte/Compras/Importar',cabecera,columnas,true,confirmartabla,botonesreporte);
+		creartablafour('validacion',checks,formdata,'#cargareportecomprasfile','table table-bordered','tablareporte1','#divreportecomprastable','/Reporte/Compras/Importar',cabecera,columnas,true,confirmartabla,botonesreporte,tabla_var_rcompras);
 	});
 	///
 	$('#formrenta').submit(function(event){
@@ -482,9 +578,20 @@ function eventosreporte()
 				ruta: '/Delete/trash_renta',
 				id_columnname: 'id',
 				tag: true,
-				confirm: delete_row,
-			}
-		];
+                confirm: delete_row_rrentas,
+            }
+        ];
+
+        function delete_row_rrentas(data) {
+            function eliminartablachill() {
+                tabla_var_rrentas
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
 		let form = document.querySelector('#formrenta');
 		let formdata = new FormData(form);
 		function confirmartabla(data) {
@@ -516,9 +623,20 @@ function eventosreporte()
 				ruta: '/Delete/trash_reporte_ventas',
 				id_columnname: 'id',
 				tag: true,
-				confirm: delete_row,
-			}
+                confirm: delete_row_rventas,
+            }
         ];
+
+        function delete_row_rventas(data) {
+            function eliminartablachill() {
+                tabla_var_rventas
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
 		let form = document.querySelector('#formventas');
 		let formdata = new FormData(form);
 		function confirmartabla(data) {

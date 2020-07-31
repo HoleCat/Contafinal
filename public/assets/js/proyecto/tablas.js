@@ -1,3 +1,5 @@
+var tabla_var;
+
 function borrarregistro(id,ruta) {
 	let formData = new FormData();
 	formData.set('id',id);
@@ -24,16 +26,6 @@ function borrarregistro(id,ruta) {
 		}
 		funcion(dataresultado);
 	});
-}
-
-function delete_row(respuesta)
-{
-	let tag = respuesta.tag;
-	let tabla = respuesta.tabla;
-	let data = respuesta.data;
-	
-	tag.parentNode.parentNode.remove();
-	console.log(data);
 }
 
 function creartablavalidada(validacion,clases,tabla,detonador,contenedor,ruta,columnas,cabeceras,datatable,funcion,botones,identificador) {
@@ -116,12 +108,12 @@ function creartablavalidada(validacion,clases,tabla,detonador,contenedor,ruta,co
 								if(btn.tag == true)
 								{
 									boton.addEventListener("click", function(e){
-										btn.funcion(tabla,boton,btn.ruta,id,btn.confirm);
+										btn.funcion(boton,btn.ruta,id,btn.confirm);
 									});
 								}
 								else{
 									boton.addEventListener("click", function(e){
-										btn.funcion(btn.ruta,id,btn.confirm);
+										btn.funcion(boton,btn.ruta,id,btn.confirm)
 									});
 								}
 								td.append(boton);
@@ -139,7 +131,7 @@ function creartablavalidada(validacion,clases,tabla,detonador,contenedor,ruta,co
 				if(!status.error)
 				{
 					if(datatable == true) {
-						$('#' + tabla).DataTable({
+						tabla_var = $('#' + tabla).DataTable({
 							"scrollY":  "200px",
 							"scrollCollapse": true,
 							"scrollX": true,
@@ -265,6 +257,7 @@ function creartabla(clases,tabla,detonador,contenedor,ruta,cabecera,datatable,fu
 
 function tabla_caja(parametros,clases,tabla,contenedor,ruta,columnas,cabeceras,datatable,funcion,botones,identificador) {
 	let resultado;
+	
 	var formData = new FormData();
 	parametros.forEach(param => {
 		formData.set(param.header,param.value);
@@ -319,12 +312,12 @@ function tabla_caja(parametros,clases,tabla,contenedor,ruta,columnas,cabeceras,d
 					if(btn.tag == true)
 					{
 						boton.addEventListener("click", function(e){
-							btn.funcion(tabla,boton,btn.ruta,id,btn.confirm);
+							btn.funcion(boton,btn.ruta,id,btn.confirm);
 						});
 					}
 					else{
 						boton.addEventListener("click", function(e){
-							btn.funcion(btn.ruta,id,btn.confirm);
+							btn.funcion(boton,btn.ruta,id,btn.confirm)
 						});
 					}
 					td.append(boton);
@@ -338,7 +331,7 @@ function tabla_caja(parametros,clases,tabla,contenedor,ruta,columnas,cabeceras,d
 		}
 	}).done(function(){
 		if(datatable == true) {
-            $('#' + tabla).DataTable({
+            tabla_var = $('#' + tabla).DataTable({
 				"scrollY":  "200px",
         		"scrollCollapse": true,
 				"scrollX": true,
@@ -346,7 +339,7 @@ function tabla_caja(parametros,clases,tabla,contenedor,ruta,columnas,cabeceras,d
                 "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
             });
 		}
-		funcion(resultado);
+		funcion(tabla,resultado);
 	});
 
 }
@@ -416,7 +409,7 @@ function creartablabasica(formData,clases,tabla,contenedor,ruta,cabeceras,datata
 					}
 					else{
 						boton.addEventListener("click", function(e){
-							btn.funcion(btn.ruta,id,btn.confirm);
+							btn.funcion(boton,btn.ruta,id,btn.confirm)
 						});
 					}
 					td.append(boton);
@@ -430,10 +423,10 @@ function creartablabasica(formData,clases,tabla,contenedor,ruta,cabeceras,datata
 		}
 	}).done(function(){
 		if(datatable == true) {
-            $('#' + tabla).DataTable({
+            tabla_var = $('#' + tabla).DataTable({
 				"scrollY":  "200px",
-        "scrollCollapse": true,
-		"scrollX": true,
+				"scrollCollapse": true,
+				"scrollX": true,
                 "iDisplayLength": 5,
                 "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
             });
@@ -683,7 +676,7 @@ function creartablaone(formdata,spinner,clases,tabla,contenedor,ruta,cabecera,co
 		}
 	}).done(function(){
 		if (datatable == true) {
-            $('#' + tabla).DataTable({
+            tabla_var = $('#' + tabla).DataTable({
 				"scrollY":  "200px",
         		"scrollCollapse": true,
 				"scrollX": true,
@@ -758,12 +751,12 @@ function creartablatwo(dataname,formdata,spinner,clases,tabla,contenedor,ruta,ca
 						if(btn.tag == true)
 						{
 							boton.addEventListener("click", function(e){
-								btn.funcion(tabla,boton,btn.ruta,id,btn.confirm);
+								btn.funcion(boton,btn.ruta,id,btn.confirm);
 							});
 						}
 						else{
 							boton.addEventListener("click", function(e){
-								btn.funcion(btn.ruta,id,btn.confirm);
+								btn.funcion(boton,btn.ruta,id,btn.confirm)
 							});
 						}
 						td.append(boton);
@@ -784,7 +777,7 @@ function creartablatwo(dataname,formdata,spinner,clases,tabla,contenedor,ruta,ca
 		else
 		{
 			if (datatable == true) {
-				$('#' + tabla).DataTable({
+				tabla_var = $('#' + tabla).DataTable({
 					"scrollY":  "200px",
 					"scrollCollapse": true,
 					"scrollX": true,
@@ -873,17 +866,16 @@ function creartablathree(checks,formdata,spinner,clases,tabla,contenedor,ruta,ca
 					boton.setAttribute('class', 'btn btn-danger');
 					boton.innerHTML = btn.btn_text;
 					console.log(btn.tag);
-					if(btn.tag == true)
-					{
-						boton.addEventListener("click", function(e){
-							btn.funcion(tabla,boton,btn.ruta,id,btn.confirm);
-						});
-					}
-					else{
-						boton.addEventListener("click", function(e){
-							btn.funcion(btn.ruta,id,btn.confirm);
-						});
-					}
+                    if (btn.tag == true) {
+                        boton.addEventListener("click", function (e) {
+                            btn.funcion(boton, btn.ruta, id, btn.confirm);
+                        });
+                    }
+                    else {
+                        boton.addEventListener("click", function (e) {
+                            btn.funcion(boton, btn.ruta, id, btn.confirm)
+                        });
+                    }
 					td.append(boton);
 					tr.append(td);
 				});
@@ -908,8 +900,9 @@ function creartablathree(checks,formdata,spinner,clases,tabla,contenedor,ruta,ca
 	});
 }
 //SEMI PERFECTA
-function creartablafour(dataname,checks,formdata,spinner,clases,tabla,contenedor,ruta,cabecera,columnas,datatable,funcion,botones)
+function creartablafour(dataname, checks, formdata, spinner, clases, tabla, contenedor, ruta, cabecera, columnas, datatable, funcion, botones, vtabla)
 {
+    vtabla = vtabla;
 	mostrarcarga(spinner,true);
 	var resultado;
 	var status;
@@ -998,17 +991,16 @@ function creartablafour(dataname,checks,formdata,spinner,clases,tabla,contenedor
 						boton.setAttribute('class', 'btn btn-danger');
 						boton.innerHTML = btn.btn_text;
 						console.log(btn.tag);
-						if(btn.tag == true)
-						{
-							boton.addEventListener("click", function(e){
-								btn.funcion(tabla,boton,btn.ruta,id,btn.confirm);
-							});
-						}
-						else{
-							boton.addEventListener("click", function(e){
-								btn.funcion(btn.ruta,id,btn.confirm);
-							});
-						}
+                        if (btn.tag == true) {
+                            boton.addEventListener("click", function (e) {
+                                btn.funcion(boton, btn.ruta, id, btn.confirm);
+                            });
+                        }
+                        else {
+                            boton.addEventListener("click", function (e) {
+                                btn.funcion(boton, btn.ruta, id, btn.confirm)
+                            });
+                        }
 						td.append(boton);
 						tr.append(td);
 					});
@@ -1026,7 +1018,7 @@ function creartablafour(dataname,checks,formdata,spinner,clases,tabla,contenedor
 		else
 		{
 			if (datatable == true) {
-				$('#' + tabla).DataTable({
+                vtabla = $('#' + tabla).DataTable({
 					"scrollY":  "200px",
 				"scrollCollapse": true,
 				"scrollX": true,
@@ -1038,12 +1030,13 @@ function creartablafour(dataname,checks,formdata,spinner,clases,tabla,contenedor
 		}
 		
 		mostrarcarga(spinner,false);
-        
+        return vtabla;
 	});
 }
 //SEMI PERFECTA
-function creartablafive(dataname,formdata,spinner,clases,tabla,contenedor,ruta,cabecera,columnas,datatable,funcion,botones)
+function creartablafive(dataname,formdata,spinner,clases,tabla,contenedor,ruta,cabecera,columnas,datatable,funcion,botones,vtabla)
 {
+    vtabla = vtabla;
 	mostrarcarga(spinner,true);
 	var resultado;
 	var status;
@@ -1103,17 +1096,16 @@ function creartablafive(dataname,formdata,spinner,clases,tabla,contenedor,ruta,c
 						boton.setAttribute('class', 'btn btn-danger');
 						boton.innerHTML = btn.btn_text;
 						console.log(btn.tag);
-						if(btn.tag == true)
-						{
-							boton.addEventListener("click", function(e){
-								btn.funcion(tabla,boton,btn.ruta,id,btn.confirm);
-							});
-						}
-						else{
-							boton.addEventListener("click", function(e){
-								btn.funcion(btn.ruta,id,btn.confirm);
-							});
-						}
+                        if (btn.tag == true) {
+                            boton.addEventListener("click", function (e) {
+                                btn.funcion(boton, btn.ruta, id, btn.confirm);
+                            });
+                        }
+                        else {
+                            boton.addEventListener("click", function (e) {
+                                btn.funcion(boton, btn.ruta, id, btn.confirm)
+                            });
+                        }
 						td.append(boton);
 						tr.append(td);
 					});
@@ -1128,7 +1120,7 @@ function creartablafive(dataname,formdata,spinner,clases,tabla,contenedor,ruta,c
 	}).done(function(){
 		
 		if (datatable == true) {
-			$('#' + tabla).DataTable({
+			vtabla = $('#' + tabla).DataTable({
 				"scrollY":  "200px",
 				"scrollCollapse": true,
 				"scrollX": true,
@@ -1139,13 +1131,14 @@ function creartablafive(dataname,formdata,spinner,clases,tabla,contenedor,ruta,c
 		funcion(response);
 		
 		mostrarcarga(spinner,false);
-        
+        return vtabla;
 	});
 }
 //SIN AJAX RECIBEN JSON
 //SEMI PERFECTA
-function creartablasix(resultado,checks,formdata,spinner,clases,tabla,contenedor,cabecera,columnas,datatable,funcion,botones)
+function creartablasix(resultado, checks, formdata, spinner, clases, tabla, contenedor, cabecera, columnas, datatable, funcion, botones, vtabla)
 {
+    vtabla = vtabla;
 	mostrarcarga(spinner,true);
 	$(contenedor).html('');
 	var table;
@@ -1215,17 +1208,16 @@ function creartablasix(resultado,checks,formdata,spinner,clases,tabla,contenedor
 			boton.setAttribute('class', 'btn btn-danger');
 			boton.innerHTML = btn.btn_text;
 			console.log(btn.tag);
-			if(btn.tag == true)
-			{
-				boton.addEventListener("click", function(e){
-					btn.funcion(tabla,boton,btn.ruta,id,btn.confirm);
-				});
-			}
-			else{
-				boton.addEventListener("click", function(e){
-					btn.funcion(btn.ruta,id,btn.confirm);
-				});
-			}
+            if (btn.tag == true) {
+                boton.addEventListener("click", function (e) {
+                    btn.funcion(boton, btn.ruta, id, btn.confirm);
+                });
+            }
+            else {
+                boton.addEventListener("click", function (e) {
+                    btn.funcion(boton, btn.ruta, id, btn.confirm)
+                });
+            }
 			td.append(boton);
 			tr.append(td);
 		});
@@ -1235,24 +1227,22 @@ function creartablasix(resultado,checks,formdata,spinner,clases,tabla,contenedor
 	table.append(tbody);
 	document.querySelector(contenedor).append(table);
 	if(datatable == true) {
-		var m = $('#' + tabla).DataTable({
+		vtabla = $('#' + tabla).DataTable({
 			"scrollY":  "200px",
 			"scrollCollapse": true,
 			"scrollX": true,
 			"iDisplayLength": 5,
 			"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
 		});
-
-		$('#'+tabla).on( 'click', 'tbody tr button', function () {
-			m.row( this ).delete();
-		} );
 	}
 	mostrarcarga(spinner,false);
-	funcion(resultado);
+    funcion(resultado);
+    return vtabla;
 }
 //SEMI PERFECTA
-function creartablaseven(resultado,formdata,spinner,clases,tabla,contenedor,cabecera,columnas,datatable,funcion,botones)
+function creartablaseven(resultado, formdata, spinner, clases, tabla, contenedor, cabecera, columnas, datatable, funcion, botones, vtabla)
 {
+    vtabla = vtabla;
 	mostrarcarga(spinner,true);
 	var resultado;
 	var response;
@@ -1296,17 +1286,16 @@ function creartablaseven(resultado,formdata,spinner,clases,tabla,contenedor,cabe
 			boton.setAttribute('class', 'btn btn-danger');
 			boton.innerHTML = btn.btn_text;
 			console.log(btn.tag);
-			if(btn.tag == true)
-			{
-				boton.addEventListener("click", function(e){
-					btn.funcion(tabla,boton,btn.ruta,id,btn.confirm);
-				});
-			}
-			else{
-				boton.addEventListener("click", function(e){
-					btn.funcion(btn.ruta,id,btn.confirm);
-				});
-			}
+            if (btn.tag == true) {
+                boton.addEventListener("click", function (e) {
+                    btn.funcion(boton, btn.ruta, id, btn.confirm);
+                });
+            }
+            else {
+                boton.addEventListener("click", function (e) {
+                    btn.funcion(boton, btn.ruta, id, btn.confirm)
+                });
+            }
 			td.append(boton);
 			tr.append(td);
 		});
@@ -1316,7 +1305,7 @@ function creartablaseven(resultado,formdata,spinner,clases,tabla,contenedor,cabe
 	table.append(tbody);
 	document.querySelector(contenedor).append(table);
 	if (datatable == true) {
-		$('#' + tabla).DataTable({
+        vtabla = $('#' + tabla).DataTable({
 			"scrollY":  "200px",
 			"scrollCollapse": true,
 			"scrollX": true,
@@ -1325,7 +1314,8 @@ function creartablaseven(resultado,formdata,spinner,clases,tabla,contenedor,cabe
 		});
 	}
 	mostrarcarga(spinner,false);
-	funcion(response);
+    funcion(response);
+    return vtabla;
 }
 	
 		
@@ -1361,23 +1351,5 @@ function crearselectfromdata(selectid,data) {
 	});
 }
 
-function calculototal(data) {
-    console.log('data caja chica');
-    console.log(data);
-    let table = document.querySelector('#tablacajachica');
-    let tbody = table.querySelector('tbody');
-    let filas = tbody.querySelectorAll('tr');
-    for(let i=0; i<filas.length; i++){
-        let col = filas[i].querySelectorAll('td');
-        
-        const monto = parseFloat(col[11].textContent);
-        console.log(monto);
-        cajachica.total += monto;
-    }
-    let total = document.querySelector('#txttotalcajachica');
-    total.value = cajachica.total;
-    let montoentregado = document.querySelector('#txtmontoentregadocajachica');
-    let neto = document.querySelector('#txtnetocajachica');
-    neto.value = montoentregado.value - total.value;
-}
+
 

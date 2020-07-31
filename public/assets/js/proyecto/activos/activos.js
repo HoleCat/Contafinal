@@ -43,17 +43,28 @@ function eventosactivos(){
     });
     $('#formfiltroactivos').submit(function(event){
 		event.preventDefault();
-		let botonescompras = [
+		let botonesactivos = [
 			{
 				btn_text: '<i class="fas fa-trash-alt"></i>',
 				funcion: cambiarregistrotag,
 				ruta: '/Delete/trash_activos',
 				id_columnname: 'id',
 				tag: true,
-				confirm: delete_row,
+				confirm: delete_row_activos,
+            }
+        ];
 
-			}
-		]
+        function delete_row_activos(data) {
+            function eliminartablachill() {
+                tabla_var
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
+
 		let form = document.querySelector('#formfiltroactivos');
 		let formdata = new FormData(form);
         let columnas = ['Codigo','CuentaContable','Descipcion','Marca','Modelo','NumeroSeriePlaca','CostoFin','Adquisicion','Mejoras'
@@ -66,7 +77,7 @@ function eventosactivos(){
         ,'CostoNetoIni','FecAdquisicion','FecInicio','Metodo','NroDoc','PorcDepreciacion','DepreAcumulada','DepreEjercicio','DepreRelacionada','DepreOtros'
         ,'DepreHistorico','DepreAjusInflacion','DepreAcuInflacion','CostoHistorico','DepreAcuTributaria','CostoNetoIniTributaria','DepreEjercicioTributaria'
         ,'FecBaja','RATIO','DEPRESIACION','DEPRESIACION_VALIDADA','ANALISISn1','ANALISISn2','OPCIONES'];
-		creartablaone(formdata,'#cargafiltroactivos','table table-bordered','tablaactivos','#divactivostable','/Activos/Filtrar',cabecera,columnas,true,confirmartabla,botonescompras);
+		creartablaone(formdata,'#cargafiltroactivos','table table-bordered','tablaactivos','#divactivostable','/Activos/Filtrar',cabecera,columnas,true,confirmartabla,botonesactivos);
 	});
 }
 

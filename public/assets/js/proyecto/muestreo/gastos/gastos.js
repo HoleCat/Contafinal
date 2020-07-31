@@ -34,14 +34,29 @@ function eventosgastos(){
 	});
 	$('#formfiltrogastos').submit(function(event){
 		event.preventDefault();
-		let botonesgastos = [
-			{
-				texto: '<i class="fas fa-trash-alt"></i>',
-				accion: 'borrardetalleliquidacion',
-				ruta: '/Destroy/Tuvieja',
-				id: 0
-			}
-		]
+		
+        var botonesgastos = [
+            {
+                btn_text: '<i class="fas fa-trash-alt"></i>',
+                funcion: cambiarregistrotag,
+                ruta: '/Delete/trash_gasto',
+                id_columnname: 'id',
+                tag: true,
+                confirm: delete_gasto,
+            }
+        ]
+
+        function delete_gasto(data) {
+            function eliminartablachill() {
+                tabla_var
+                    .row(data.tag.closest('tr'))
+                    .remove()
+                    .draw();
+            }
+            eliminartablachill();
+            console.log(data);
+        }
+
 		let form = document.querySelector('#formfiltrogastos');
 		let formdata = new FormData(form);
 		let cabecera = [
