@@ -31,7 +31,7 @@
         "datatables.net-dt": "^1.10.20",
         "jquery": "^3.2",
         "jquery-confirm": "^3.3.4",
-        "jszip": "^3.4.0",
+        "jszip": "^3.7.0",
         "pdfmake": "^0.1.65"
     }
 }
